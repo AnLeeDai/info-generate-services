@@ -4,7 +4,7 @@ services:
     runtime: docker
     plan: free
     repo: https://github.com/AnLeeDai/info-generate-services.git
-    branch: main  # Change this to your main branch
+    branch: master  # Updated to match your current branch
     dockerfilePath: ./Dockerfile
     envVars:
       - key: NODE_ENV
