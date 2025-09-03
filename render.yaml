@@ -11,6 +11,8 @@ services:
         value: production
       - key: PORT
         value: 10000
+      - key: SQLITE_DB_PATH
+        value: /app/data/database.sqlite
     healthCheckPath: /health
     
     # Uncomment and configure these if you need them:
