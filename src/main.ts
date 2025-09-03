@@ -10,7 +10,17 @@ import { getDataSourceToken } from '@nestjs/typeorm';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.useGlobalInterceptors(new ResponseTransformInterceptor());
-  await app.listen(process.env.PORT ?? 3000);
+
+  // Enable CORS for production
+  app.enableCors();
+
+  // Get port from environment variable (Render uses PORT)
+  const port = process.env.PORT || 3000;
+
+  // Bind to 0.0.0.0 as required by Render
+  await app.listen(port, '0.0.0.0');
+
+  console.log(`Application is running on: http://0.0.0.0:${port}`);
 
   // Log entity metadata và bảng hiện có (chuẩn TypeORM v0.3+)
   try {

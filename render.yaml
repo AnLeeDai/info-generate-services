@@ -1,0 +1,30 @@
+services:
+  - type: web
+    name: info-generate-services
+    runtime: docker
+    plan: free
+    repo: https://github.com/AnLeeDai/info-generate-services.git
+    branch: main  # Change this to your main branch
+    dockerfilePath: ./Dockerfile
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+    healthCheckPath: /health
+    
+    # Uncomment and configure these if you need them:
+    # buildCommand: npm run build
+    # startCommand: npm run start:prod
+    
+    # If you need persistent storage for SQLite
+    disk:
+      name: sqlite-data
+      mountPath: /app/data
+      sizeGB: 1
+
+# Uncomment if you need a database service
+# databases:
+#   - name: postgres-db
+#     databaseName: info_generate_db
+#     user: info_generate_user

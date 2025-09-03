@@ -47,9 +47,11 @@ export class NameGenerateController {
   @Get('name/history')
   async getNameHistory() {
     await this.nameService.getHistory();
+    const totalGeneratedNames = await this.nameService.getTotalGeneratedNames();
 
     return {
       history: await this.nameService.getHistory(),
+      total_generated_names: totalGeneratedNames,
       message:
         'If the history is empty, it means no names have been generated yet.',
     };

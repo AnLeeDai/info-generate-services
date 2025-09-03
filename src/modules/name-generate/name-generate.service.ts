@@ -24,6 +24,12 @@ export class NameServices {
     return this.historyRepo.save(history);
   }
 
+  // total number of generated names
+  async getTotalGeneratedNames() {
+    const history = await this.getHistory();
+    return history.reduce((total, entry) => total + entry.name_number, 0);
+  }
+
   // get name generation history
   async getHistory() {
     return this.historyRepo.find();

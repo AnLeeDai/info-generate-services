@@ -59,6 +59,65 @@ $ npm run test:cov
 
 ## Deployment
 
+### Docker Deployment
+
+This project includes Docker configuration for easy deployment on platforms like Render.
+
+#### Local Docker Testing
+
+```bash
+# Build Docker image
+$ npm run docker:build
+
+# Run container locally
+$ npm run docker:run
+
+# Or use the test script
+$ npm run docker:test
+```
+
+#### Deploy to Render
+
+1. **Fork/Clone** this repository to your GitHub account
+2. **Connect to Render**: Go to [Render Dashboard](https://dashboard.render.com/) and create a new Web Service
+3. **Choose deployment method**:
+   - **Option A**: Deploy from Git repository (recommended)
+     - Select your repository
+     - Choose "Docker" as runtime
+     - Render will automatically use the `Dockerfile`
+   - **Option B**: Use Blueprint
+     - Upload the `render.yaml` file for infrastructure-as-code deployment
+
+4. **Configure environment variables**:
+   ```
+   NODE_ENV=production
+   PORT=10000
+   ```
+
+5. **Database considerations**:
+   - The app uses SQLite by default with persistent disk storage
+   - For production, consider upgrading to PostgreSQL (uncomment database section in `render.yaml`)
+
+#### Manual Deployment Steps
+
+If you prefer manual deployment:
+
+```bash
+# Build for production
+$ npm run build
+
+# Start production server
+$ npm run start:prod
+```
+
+**Important Notes for Render:**
+- The app binds to `0.0.0.0:${PORT}` as required by Render
+- Health check endpoint available at `/health`
+- SQLite database persists using Render's disk storage
+- Free tier limitations apply (see [Render docs](https://render.com/docs/free))
+
+### Traditional Deployment
+
 When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
 
 If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
