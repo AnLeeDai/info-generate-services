@@ -10,6 +10,15 @@ export class AppController {
     return 'Hello World!';
   }
 
+  @Get('health')
+  healthCheck() {
+    return {
+      status: 'ok',
+      timestamp: new Date().toISOString(),
+      service: 'info-generate-services',
+    };
+  }
+
   @Get('data/all')
   async getAllData() {
     const allData = await this.appService.getAllData();

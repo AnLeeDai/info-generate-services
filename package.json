@@ -18,7 +18,10 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "delete-db": "ts-node scripts/delete-db.ts"
+    "delete-db": "ts-node scripts/delete-db.ts",
+    "docker:build": "docker build -t info-generate-services .",
+    "docker:run": "docker run -p 3000:10000 -e PORT=10000 info-generate-services",
+    "docker:test": "./docker-test.sh"
   },
   "dependencies": {
     "@faker-js/faker": "^10.0.0",
